@@ -50,6 +50,7 @@ using LmpCommon.Message.Types;
 using LmpCommon.Time;
 using System;
 using System.Threading;
+using LmpClient.Systems.Quicksave;
 
 namespace LmpClient.Network
 {
@@ -208,6 +209,9 @@ namespace LmpClient.Network
                     break;
                 case ServerMessageType.CraftLibrary:
                     CraftLibrarySystem.Singleton.EnqueueMessage(msg);
+                    break;
+                case ServerMessageType.Quicksave:
+                    QuicksaveSystem.Singleton.EnqueueMessage(msg);
                     break;
                 case ServerMessageType.Flag:
                     FlagSystem.Singleton.EnqueueMessage(msg);

@@ -18,6 +18,7 @@ namespace LmpClient.Localization
         public static ChatWindowText ChatWindowText = new ChatWindowText();
         public static ConnectionWindowText ConnectionWindowText = new ConnectionWindowText();
         public static CraftLibraryWindowText CraftLibraryWindowText = new CraftLibraryWindowText();
+        public static QuicksaveWindowText QuicksaveWindowText = new QuicksaveWindowText();
         public static ModWindowText ModWindowText = new ModWindowText();
         public static OptionsWindowText OptionsWindowText = new OptionsWindowText();
         public static ServerListWindowText ServerListWindowText = new ServerListWindowText();

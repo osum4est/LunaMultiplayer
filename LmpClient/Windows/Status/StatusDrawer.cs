@@ -1,6 +1,7 @@
 ﻿using LmpClient.Systems.Chat;
 using LmpClient.Systems.CraftLibrary;
 using LmpClient.Systems.PlayerColorSys;
+using LmpClient.Systems.Quicksave;
 using LmpClient.Systems.Screenshot;
 using LmpClient.Systems.SettingsSys;
 using LmpClient.Systems.Status;
@@ -10,6 +11,7 @@ using LmpClient.Windows.Chat;
 using LmpClient.Windows.CraftLibrary;
 using LmpClient.Windows.Debug;
 using LmpClient.Windows.Options;
+using LmpClient.Windows.Quicksave;
 using LmpClient.Windows.Screenshots;
 using LmpClient.Windows.Systems;
 using LmpClient.Windows.Vessels;
@@ -55,6 +57,7 @@ namespace LmpClient.Windows.Status
                 CraftLibrarySystem.Singleton.NewContent && Flash ? RocketRedIcon : RocketIcon, ToggleButtonStyle);
             ScreenshotsWindow.Singleton.Display = GUILayout.Toggle(ScreenshotsWindow.Singleton.Display,
                 ScreenshotSystem.Singleton.NewContent && Flash ? CameraRedIcon : CameraIcon, ToggleButtonStyle);
+            QuicksaveWindow.Singleton.Display = GUILayout.Toggle(QuicksaveWindow.Singleton.Display, QuicksaveIcon, ToggleButtonStyle);
 
             if (SettingsSystem.ServerSettings.AllowAdmin)
             {

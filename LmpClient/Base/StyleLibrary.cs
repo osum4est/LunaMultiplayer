@@ -70,6 +70,9 @@ namespace LmpClient.Base
         protected static GUIContent CameraRedIcon;
         protected static GUIContent RocketIcon;
         protected static GUIContent RocketRedIcon;
+        protected static GUIContent QuicksaveIcon;
+        protected static GUIContent QuicksaveLoadIcon;
+        protected static GUIContent QuicksaveSaveIcon;
         protected static GUIContent AdminIcon;
         protected static GUIContent KickIcon;
         protected static GUIContent KickBigIcon;
@@ -238,6 +241,21 @@ namespace LmpClient.Base
                         CommonUtil.CombinePaths(MainSystem.KspPath, "GameData", "LunaMultiplayer", "Icons",
                             "rocketRed.png"), 16, 16),
                     LocalizationContainer.ButtonTooltips.RocketIcon);
+                QuicksaveIcon = new GUIContent(
+                    WindowUtil.LoadIcon(
+                        CommonUtil.CombinePaths(MainSystem.KspPath, "GameData", "LunaMultiplayer", "Icons",
+                            "quicksave.png"), 16, 16),
+                    LocalizationContainer.ButtonTooltips.QuicksaveIcon);
+                QuicksaveLoadIcon = new GUIContent(
+                    WindowUtil.LoadIcon(
+                        CommonUtil.CombinePaths(MainSystem.KspPath, "GameData", "LunaMultiplayer", "Icons",
+                            "upload.png"), 16, 16),
+                    LocalizationContainer.ButtonTooltips.QuicksaveLoadIcon);
+                QuicksaveSaveIcon = new GUIContent(
+                    WindowUtil.LoadIcon(
+                        CommonUtil.CombinePaths(MainSystem.KspPath, "GameData", "LunaMultiplayer", "Icons",
+                            "quicksaveSave.png"), 16, 16),
+                    LocalizationContainer.ButtonTooltips.QuicksaveLoadIcon);
                 AdminIcon = new GUIContent(
                     WindowUtil.LoadIcon(
                         CommonUtil.CombinePaths(MainSystem.KspPath, "GameData", "LunaMultiplayer", "Icons",

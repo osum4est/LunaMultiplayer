@@ -17,6 +17,9 @@
         public string ChatIcon { get; set; } = "Chat";
         public string CameraIcon { get; set; } = "Screenshots";
         public string RocketIcon { get; set; } = "Craft Library";
+        public string QuicksaveIcon { get; set; } = "Quicksaves";
+        public string QuicksaveLoadIcon { get; set; } = "Load";
+        public string QuicksaveSaveIcon { get; set; } = "Save";
         public string AdminIcon { get; set; } = "Admin";
         public string KickIcon { get; set; } = "Kick";
         public string BanIcon { get; set; } = "Ban";

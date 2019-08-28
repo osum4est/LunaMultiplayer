@@ -31,6 +31,7 @@ namespace Server.Server
             [ClientMessageType.Settings] = new SettingsMsgReader(),
             [ClientMessageType.Vessel] = new VesselMsgReader(),
             [ClientMessageType.CraftLibrary] = new CraftLibraryMsgReader(),
+            [ClientMessageType.Quicksave] = new QuicksaveMsgReader(),
             [ClientMessageType.Flag] = new FlagSyncMsgReader(),
             [ClientMessageType.Motd] = new MotdMsgReader(),
             [ClientMessageType.Warp] = new WarpControlMsgReader(),

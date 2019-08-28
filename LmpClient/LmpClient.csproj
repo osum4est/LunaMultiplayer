@@ -149,6 +149,7 @@
     <Compile Include="Harmony\Vessel_GoOffRails.cs" />
     <Compile Include="Harmony\PauseMenu_DrawRevertOptions.cs" />
     <Compile Include="Harmony\Part_Decouple.cs" />
+    <Compile Include="Localization\Structures\QuicksaveWindowText.cs" />
     <Compile Include="Localization\Structures\RevertDialogText.cs" />
     <Compile Include="Localization\Structures\ServerListFiltersText.cs" />
     <Compile Include="ModuleStore\Harmony\KerbalEVA_OnDeboardSeat.cs" />
@@ -212,6 +213,9 @@
     <Compile Include="Systems\Asteroid\AsteroidEvents.cs" />
     <Compile Include="Systems\Label\LabelEvents.cs" />
     <Compile Include="Systems\Label\LabelSystem.cs" />
+    <Compile Include="Systems\Quicksave\QuicksaveMessageHandler.cs" />
+    <Compile Include="Systems\Quicksave\QuicksaveMessageSender.cs" />
+    <Compile Include="Systems\Quicksave\QuicksaveSystem.cs" />
     <Compile Include="Systems\Revert\RevertEvents.cs" />
     <Compile Include="Systems\Revert\RevertSystem.cs" />
     <Compile Include="Systems\SafetyBubble\SpawnPointLocation.cs" />
@@ -381,6 +385,8 @@
     <Compile Include="Windows\Admin\AdminWindow.cs" />
     <Compile Include="Windows\BannedParts\BannedPartsDrawer.cs" />
     <Compile Include="Windows\BannedParts\BannedPartsWindow.cs" />
+    <Compile Include="Windows\Quicksave\QuicksaveDrawer.cs" />
+    <Compile Include="Windows\Quicksave\QuicksaveWindow.cs" />
     <Compile Include="Windows\ServerList\ColorEffect.cs" />
     <Compile Include="Windows\Screenshots\ScreenshotDrawer.cs" />
     <Compile Include="Windows\Screenshots\ScreenshotWindow.cs" />
