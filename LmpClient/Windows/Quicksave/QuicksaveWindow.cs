@@ -28,6 +28,8 @@ namespace LmpClient.Windows.Quicksave
         private const float WindowWidth = 400;
 
         private static Vector2 _scrollPos;
+        
+        private static string _quicksaveName;
 
         private static GUIStyle _quicksaveStyle;
         private static GUIStyle _buttonStyle;
@@ -58,9 +60,8 @@ namespace LmpClient.Windows.Quicksave
                 LocalizationContainer.QuicksaveWindowText.Title));
         }
 
-        private void Refresh()
+        private static void Refresh()
         {
-            System.Quicksaves.Clear();
             System.MessageSender.SendQuicksaveListRequestMsg();
         }
     }

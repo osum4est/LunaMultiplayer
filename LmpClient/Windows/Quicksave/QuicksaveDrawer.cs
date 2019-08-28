@@ -5,6 +5,8 @@ namespace LmpClient.Windows.Quicksave
 {
     public partial class QuicksaveWindow
     {
+        private static int _prevNumQuicksaves = -1;
+
         protected override void DrawWindowContent(int windowId)
         {
             GUILayout.BeginVertical();
@@ -22,14 +24,16 @@ namespace LmpClient.Windows.Quicksave
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
 
-            foreach (var quicksave in QuicksaveSystem.Singleton.Quicksaves)
+            foreach (var quicksave in System.Quicksaves)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label($"{quicksave.Name} ({quicksave.Date:g})", _quicksaveStyle);
                 if (GUILayout.Button(QuicksaveLoadIcon, _buttonStyle))
                     System.MessageSender.SendQuicksaveLoadRequestMsg(quicksave);
+
                 if (GUILayout.Button(DeleteIcon, _buttonStyle))
                     System.MessageSender.SendQuicksaveRemoveRequestMsg(quicksave);
+
                 GUILayout.EndHorizontal();
             }
 
@@ -41,11 +45,23 @@ namespace LmpClient.Windows.Quicksave
         {
             GUILayout.BeginHorizontal();
 
-            var name = GUILayout.TextArea($"Quicksave #{QuicksaveSystem.Singleton.Quicksaves.Count + 1}");
+            _quicksaveName = UpdateQuicksaveName(GUILayout.TextArea(_quicksaveName));
+
             if (GUILayout.Button(QuicksaveSaveIcon, _buttonStyle))
-                System.MessageSender.SendQuicksaveSaveRequestMsg(name);
+                System.MessageSender.SendQuicksaveSaveRequestMsg(_quicksaveName);
 
             GUILayout.EndHorizontal();
+        }
+
+        private static string UpdateQuicksaveName(string newName)
+        {
+            var defaultName = $"Quicksave #{System.Quicksaves.Count + 1}";
+
+            if (_prevNumQuicksaves == System.Quicksaves.Count)
+                return newName;
+
+            _prevNumQuicksaves = System.Quicksaves.Count;
+            return defaultName;
         }
     }
 }

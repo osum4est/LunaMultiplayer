@@ -19,21 +19,7 @@ namespace Server.System
         {
             Task.Run(() =>
             {
-                var vesselFolder = GetVesselFolder(data.VesselId);
-                var files = Directory.GetFiles(vesselFolder);
-
-                var msgData = ServerContext.ServerMessageFactory.CreateNewMessageData<QuicksaveListReplyMsgData>();
-                msgData.QuicksavesCount = files.Length;
-                msgData.Quicksaves = new QuicksaveBasicInfo[files.Length];
-                for (var i = 0; i < files.Length; i++)
-                    msgData.Quicksaves[i] = new QuicksaveBasicInfo
-                    {
-                        Name = Path.GetFileNameWithoutExtension(files[i]),
-                        Date = File.GetCreationTime(files[i]),
-                        VesselId = data.VesselId
-                    };
-
-                MessageQueuer.SendToClient<QuicksaveSrvMsg>(client, msgData);
+                SendQuicksaveList(client, data.VesselId);
             });
         }
 
@@ -79,6 +65,8 @@ namespace Server.System
 
                 File.WriteAllText(quicksaveFile,
                     VesselStoreSystem.CurrentVessels[data.VesselId].ToString());
+
+                SendQuicksaveList(client, data.VesselId);
             });
         }
 
@@ -89,6 +77,8 @@ namespace Server.System
                 var quicksaveFile = GetQuicksaveFile(data.QuicksaveInfo.Name, data.QuicksaveInfo.VesselId);
                 if (File.Exists(quicksaveFile))
                     File.Delete(quicksaveFile);
+
+                SendQuicksaveList(client, data.QuicksaveInfo.VesselId);
             });
         }
 
@@ -103,6 +93,25 @@ namespace Server.System
         private static string GetQuicksaveFile(string name, Guid vesselId)
         {
             return Path.Combine(GetVesselFolder(vesselId), name) + ".txt";
+        }
+
+        private static void SendQuicksaveList(ClientStructure client, Guid vesselId)
+        {
+            var vesselFolder = GetVesselFolder(vesselId);
+            var files = Directory.GetFiles(vesselFolder);
+
+            var msgData = ServerContext.ServerMessageFactory.CreateNewMessageData<QuicksaveListReplyMsgData>();
+            msgData.QuicksavesCount = files.Length;
+            msgData.Quicksaves = new QuicksaveBasicInfo[files.Length];
+            for (var i = 0; i < files.Length; i++)
+                msgData.Quicksaves[i] = new QuicksaveBasicInfo
+                {
+                    Name = Path.GetFileNameWithoutExtension(files[i]),
+                    Date = File.GetCreationTime(files[i]),
+                    VesselId = vesselId
+                };
+
+            MessageQueuer.SendToClient<QuicksaveSrvMsg>(client, msgData);
         }
     }
 }
