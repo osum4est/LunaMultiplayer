@@ -2,8 +2,9 @@ using System;
 using System.Collections.Concurrent;
 using LmpClient.Base;
 using LmpClient.Base.Interface;
-using LmpClient.Events;
+using LmpClient.Systems.TimeSync;
 using LmpClient.Systems.VesselProtoSys;
+using LmpClient.Systems.Warp;
 using LmpClient.VesselUtilities;
 using LmpCommon.Message.Data.Quicksave;
 using LmpCommon.Message.Interface;
@@ -41,6 +42,7 @@ namespace LmpClient.Systems.Quicksave
 
         private static void HandleLoad(QuicksaveLoadReplyMsgData data)
         {
+            // Make sure that the quicksave corresponds to current vessel
             if (data.QuicksaveInfo.VesselId != FlightGlobals.ActiveVessel.id)
             {
                 LunaScreenMsg.PostScreenMessage("Got quicksave for wrong vessel!", 5,
@@ -50,7 +52,7 @@ namespace LmpClient.Systems.Quicksave
                 return;
             }
 
-            LunaLog.Log("[LMP]: Got quicksave load reply!");
+            // Construct the ProtoVessel using the loaded byte data
             var vesselProto = new VesselProto
             {
                 GameTime = data.QuicksaveInfo.GameTime,
@@ -62,10 +64,15 @@ namespace LmpClient.Systems.Quicksave
             Array.Copy(data.QuicksaveInfo.Data, vesselProto.RawData, data.QuicksaveInfo.NumBytes);
             var protoVessel = vesselProto.CreateProtoVessel();
 
+            // Try to reload the vessel
             if (VesselLoader.LoadVessel(protoVessel, true))
             {
-                LunaLog.Log($"[LMP]: Vessel {protoVessel.vesselID} reloaded");
-                VesselReloadEvent.onLmpVesselReloaded.Fire(protoVessel.vesselRef);
+                // Create a new subspace with the loaded vessel's time
+                TimeSyncSystem.Singleton.SetGameTime(protoVessel.launchTime + protoVessel.missionTime);
+                WarpSystem.Singleton.WaitingSubspaceIdFromServer = true;
+                WarpSystem.Singleton.MessageSender.SendNewSubspace();
+                LunaScreenMsg.PostScreenMessage($"Loaded {data.QuicksaveInfo.Name}!", 5,
+                    ScreenMessageStyle.UPPER_CENTER);
             }
             else
             {
