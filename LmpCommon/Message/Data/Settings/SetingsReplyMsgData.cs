@@ -17,6 +17,7 @@ namespace LmpCommon.Message.Data.Settings
         public bool AllowCheats;
         public bool AllowAdmin;
         public bool AllowSackKerbals;
+        public bool AllowQuicksaves;
         public int MaxNumberOfAsteroids;
         public string ConsoleIdentifier;
         public GameDifficulty GameDifficulty;
@@ -80,6 +81,7 @@ namespace LmpCommon.Message.Data.Settings
             lidgrenMsg.Write(AllowCheats);
             lidgrenMsg.Write(AllowAdmin);
             lidgrenMsg.Write(AllowSackKerbals);
+            lidgrenMsg.Write(AllowQuicksaves);
             lidgrenMsg.Write(MaxNumberOfAsteroids);
             lidgrenMsg.Write(ConsoleIdentifier);
             lidgrenMsg.Write((int)GameDifficulty);
@@ -142,6 +144,7 @@ namespace LmpCommon.Message.Data.Settings
             AllowCheats = lidgrenMsg.ReadBoolean();
             AllowAdmin = lidgrenMsg.ReadBoolean();
             AllowSackKerbals = lidgrenMsg.ReadBoolean();
+            AllowQuicksaves = lidgrenMsg.ReadBoolean();
             MaxNumberOfAsteroids = lidgrenMsg.ReadInt32();
             ConsoleIdentifier = lidgrenMsg.ReadString();
             GameDifficulty = (GameDifficulty)lidgrenMsg.ReadInt32();

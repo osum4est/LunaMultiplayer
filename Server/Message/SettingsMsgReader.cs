@@ -24,6 +24,7 @@ namespace Server.Message
             msgData.AllowCheats = GeneralSettings.SettingsStore.Cheats;
             msgData.AllowAdmin = !string.IsNullOrEmpty(GeneralSettings.SettingsStore.AdminPassword);
             msgData.AllowSackKerbals = GeneralSettings.SettingsStore.AllowSackKerbals;
+            msgData.AllowQuicksaves = GeneralSettings.SettingsStore.AllowQuicksaves;
             msgData.MaxNumberOfAsteroids = GeneralSettings.SettingsStore.NumberOfAsteroids;
             msgData.ConsoleIdentifier = GeneralSettings.SettingsStore.ConsoleIdentifier;
             msgData.GameDifficulty = GeneralSettings.SettingsStore.GameDifficulty;

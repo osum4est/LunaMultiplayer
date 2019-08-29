@@ -57,7 +57,9 @@ namespace LmpClient.Windows.Status
                 CraftLibrarySystem.Singleton.NewContent && Flash ? RocketRedIcon : RocketIcon, ToggleButtonStyle);
             ScreenshotsWindow.Singleton.Display = GUILayout.Toggle(ScreenshotsWindow.Singleton.Display,
                 ScreenshotSystem.Singleton.NewContent && Flash ? CameraRedIcon : CameraIcon, ToggleButtonStyle);
-            QuicksaveWindow.Singleton.Display = GUILayout.Toggle(QuicksaveWindow.Singleton.Display, QuicksaveIcon, ToggleButtonStyle);
+            
+            if (SettingsSystem.ServerSettings.AllowQuicksaves)
+                QuicksaveWindow.Singleton.Display = GUILayout.Toggle(QuicksaveWindow.Singleton.Display, QuicksaveIcon, ToggleButtonStyle);
 
             if (SettingsSystem.ServerSettings.AllowAdmin)
             {

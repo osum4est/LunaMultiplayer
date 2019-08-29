@@ -52,6 +52,9 @@ namespace Server.Settings.Definition
         [XmlComment(Value = "Allow players to sack kerbals")]
         public bool AllowSackKerbals { get; set; } = false;
 
+        [XmlComment(Value = "Allow players to use quicksaves")]
+        public bool AllowQuicksaves { get; set; } = true;
+
         [XmlComment(Value = "Specify the Name that will appear when you send a message using the server's console.")]
         public string ConsoleIdentifier { get; set; } = "Server";
 

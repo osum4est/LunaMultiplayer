@@ -18,6 +18,7 @@ namespace Server.Web.Structures.Settings
         public float AutoNuke => GeneralSettings.SettingsStore.AutoDekessler;
         public bool Cheats => GeneralSettings.SettingsStore.Cheats;
         public bool AllowSackKerbals => GeneralSettings.SettingsStore.AllowSackKerbals;
+        public bool AllowQuicksaves => GeneralSettings.SettingsStore.AllowQuicksaves;
         public string ConsoleIdentifier => GeneralSettings.SettingsStore.ConsoleIdentifier;
         public string GameDifficulty => GeneralSettings.SettingsStore.GameDifficulty.ToString();
         public string GameMode => GeneralSettings.SettingsStore.GameMode.ToString();
