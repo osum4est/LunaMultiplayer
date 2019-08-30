@@ -62,6 +62,7 @@ namespace LmpClient.Windows.Quicksave
 
         private static void Refresh()
         {
+            System.Quicksaves.Clear();
             System.MessageSender.SendQuicksaveListRequestMsg();
         }
     }
