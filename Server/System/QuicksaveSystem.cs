@@ -20,6 +20,7 @@ namespace Server.System
             Task.Run(() =>
             {
                 SendQuicksaveList(client, data.VesselId);
+                RemoveOldQuicksaves();
             });
         }
 
@@ -46,6 +47,7 @@ namespace Server.System
                 };
 
                 MessageQueuer.SendToClient<QuicksaveSrvMsg>(client, msgData);
+                RemoveOldQuicksaves();
             });
         }
 
@@ -67,6 +69,7 @@ namespace Server.System
                     VesselStoreSystem.CurrentVessels[data.VesselId].ToString());
 
                 SendQuicksaveList(client, data.VesselId);
+                RemoveOldQuicksaves();
             });
         }
 
@@ -79,6 +82,7 @@ namespace Server.System
                     File.Delete(quicksaveFile);
 
                 SendQuicksaveList(client, data.QuicksaveInfo.VesselId);
+                RemoveOldQuicksaves();
             });
         }
 
@@ -112,6 +116,19 @@ namespace Server.System
                 };
 
             MessageQueuer.SendToClient<QuicksaveSrvMsg>(client, msgData);
+        }
+
+        private static void RemoveOldQuicksaves()
+        {
+            foreach (var vesselQuicksaveFolder in Directory.EnumerateDirectories(QuicksavesPath))
+            {
+                var vesselId = Path.GetFileName(vesselQuicksaveFolder);
+                if (vesselId == null)
+                    continue;
+                
+                if (!VesselStoreSystem.VesselExists(Guid.Parse(vesselId)))
+                    Directory.Delete(vesselQuicksaveFolder, true);
+            }
         }
     }
 }
