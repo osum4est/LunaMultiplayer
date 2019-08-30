@@ -17,6 +17,8 @@ namespace LmpClient.Systems.Quicksave
         public ConcurrentQueue<IServerMessageBase> IncomingMessages { get; set; } =
             new ConcurrentQueue<IServerMessageBase>();
 
+        public static event Action QuicksaveListLoaded;
+
         public void HandleMessage(IServerMessageBase msg)
         {
             if (!(msg.Data is QuicksaveBaseMsgData msgData)) return;
@@ -38,6 +40,7 @@ namespace LmpClient.Systems.Quicksave
         {
             System.Quicksaves.Clear();
             System.Quicksaves.AddRange(data.Quicksaves);
+            QuicksaveListLoaded?.Invoke();
         }
 
         private static void HandleLoad(QuicksaveLoadReplyMsgData data)
