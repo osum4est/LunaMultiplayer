@@ -14,7 +14,8 @@ namespace LmpClient.Windows.Quicksave
         public override bool Display
         {
             get => base.Display && _display && MainSystem.NetworkState >= ClientState.Running &&
-                   HighLogic.LoadedSceneIsFlight && !VesselCommon.IsSpectating;
+                   HighLogic.LoadedSceneIsFlight && !VesselCommon.IsSpectating &&
+                   FlightGlobals.ActiveVessel.state != Vessel.State.DEAD;
             set
             {
                 var prevDisplay = _display;
@@ -28,7 +29,7 @@ namespace LmpClient.Windows.Quicksave
         private const float WindowWidth = 400;
 
         private static Vector2 _scrollPos;
-        
+
         private static string _quicksaveName;
 
         private static GUIStyle _quicksaveStyle;

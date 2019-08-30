@@ -13,7 +13,8 @@ namespace LmpClient.Systems.Quicksave
         public override string SystemName { get; } = nameof(QuicksaveSystem);
 
         public bool CanQuickSaveLoad => MainSystem.NetworkState >= ClientState.Running &&
-                                        HighLogic.LoadedSceneIsFlight && !VesselCommon.IsSpectating;
+                                        HighLogic.LoadedSceneIsFlight && !VesselCommon.IsSpectating &&
+                                       FlightGlobals.ActiveVessel.state != Vessel.State.DEAD;
 
         protected override void OnEnabled()
         {
@@ -47,14 +48,15 @@ namespace LmpClient.Systems.Quicksave
                 }
             }
         }
-        
+
         private void Quicksave()
         {
             QuicksaveMessageHandler.QuicksaveListLoaded -= Quicksave;
             MessageSender.SendQuicksaveSaveRequestMsg($"Quicksave #{Quicksaves.Count + 1}");
         }
-        
-        private void Quickload() {
+
+        private void Quickload()
+        {
             QuicksaveMessageHandler.QuicksaveListLoaded -= Quickload;
             if (Quicksaves.Count > 0)
                 MessageSender.SendQuicksaveLoadRequestMsg(Quicksaves.OrderBy(q => q.Date).Last());
